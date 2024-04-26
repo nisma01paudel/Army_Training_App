@@ -50,13 +50,13 @@ class _BranchScreenState extends State<BranchScreen> {
         backgroundColor: Colors.green[900],
         foregroundColor: Colors.white,
         centerTitle: true,
-        elevation: 0.0,
+        elevation: 2.0,
       ),
       backgroundColor: const Color.fromARGB(255, 222, 247, 224),
       body: Padding(
-        padding: const EdgeInsets.all(4.0),
+        padding: const EdgeInsets.all(8),
         child: ListView(
-          padding: const EdgeInsets.all(0.0),
+          padding: const EdgeInsets.all(8.0),
           children: [
             if (headOffice != null) ...[
               OfficeCard(office: headOffice!, isHeadOffice: true),
@@ -76,25 +76,16 @@ class _BranchScreenState extends State<BranchScreen> {
 class Office {
   final int? id;
   final String location;
-  final String? telephone;
-  final String mobile;
-  final String? email;
 
   Office({
     this.id,
     required this.location,
-    this.telephone,
-    required this.mobile,
-    this.email,
   });
 
   factory Office.fromJson(Map<String, dynamic> json) {
     return Office(
       id: json['id'],
       location: json['location'],
-      telephone: json['telephone'],
-      mobile: json['mobile'],
-      email: json['email'],
     );
   }
 }
@@ -117,13 +108,6 @@ class OfficeCard extends StatelessWidget {
         title: Text(office.location),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Mobile: ${office.mobile}'),
-            if (office.telephone != null)
-              Text('Telephone: ${office.telephone}'),
-            if (office.email != null) Text('Email: ${office.email}'),
-            if (isHeadOffice) Text('(Head Office)'),
-          ],
         ),
       ),
     );
