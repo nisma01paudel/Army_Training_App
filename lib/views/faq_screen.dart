@@ -1,6 +1,7 @@
 import 'package:armyapp/faq_service.dart';
-import 'package:armyapp/models/faqmodel.dart';
 import 'package:flutter/material.dart';
+
+import '../models/faqmodel.dart';
 
 class FAQScreen extends StatefulWidget {
   const FAQScreen({Key? key}) : super(key: key);
@@ -38,11 +39,9 @@ class _MyHomePageState extends State<FAQScreen> {
         foregroundColor: Colors.white,
         title: Text(
           'Frequently Asked Questions',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.green[900],
-        centerTitle: true,
-        elevation: 0.0,
       ),
       body: _faqs.isEmpty
           ? Center(child: CircularProgressIndicator())
@@ -80,32 +79,30 @@ class _FAQTileState extends State<FAQTile> {
             color: Colors.green[900],
           ),
           SizedBox(width: 8), // Adjust spacing between icon and text
-          Text(
-            widget.faq.question,
-            style: TextStyle(fontWeight: FontWeight.bold),
+          Expanded(
+            child: Text(
+              widget.faq.question,
+              style: TextStyle(fontWeight: FontWeight.bold),
+              overflow: TextOverflow.ellipsis, // Handle overflow
+            ),
           ),
         ],
       ),
       children: [
-        Row(
-          children: [
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              child: Card(
-                elevation: 4, // Add elevation for a shadow effect
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Flexible(
-                    child: Text(
-                      widget.faq.answer,
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
-                ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Card(
+            elevation: 4, // Add elevation for a shadow effect
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                widget.faq.answer,
+                style: TextStyle(fontSize: 16),
+                softWrap: true,
+                overflow: TextOverflow.visible, // Handle overflow
               ),
             ),
-          ],
+          ),
         ),
       ],
       onExpansionChanged: (value) {
